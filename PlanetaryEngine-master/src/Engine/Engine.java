@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class Engine implements MouseListener, KeyEventDispatcher, MouseMotionListener, MouseWheelListener, ActionListener, KeyListener{
@@ -68,8 +69,8 @@ public class Engine implements MouseListener, KeyEventDispatcher, MouseMotionLis
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Audio introSound = new Audio("IntroSound.wav", 0.7f);
-        introSound.run();
+        //Audio introSound = new Audio("IntroSound.wav", 0.7f);
+        //introSound.run();
 
         startingTime = System.currentTimeMillis();
         planetaryEngine = new PlanetaryEngine();

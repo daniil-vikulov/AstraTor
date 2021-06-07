@@ -62,10 +62,10 @@ public class PlanetaryEngine {
         balls.add(new Ball(1.00254*AU, 0, 0, 0, -28e3,0, balls.size()));
         balls.get(9).radius = 1737000;
         balls.get(9).m = 7.3477e22;
-        new Thread(() -> {
+        /*new Thread(() -> {
             Audio backgroundMusic = new Audio("backgroundMusic.wav", 0.8f);
             backgroundMusic.playMusic();
-        }).start();
+        }).start();*/
 
     }
 
