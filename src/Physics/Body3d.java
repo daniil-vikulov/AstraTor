@@ -8,6 +8,8 @@ public abstract class Body3d {
     public Vector3d cA;
     public Vector3d cV;
     public double m;
+    protected boolean ball3d = false;
+    protected boolean poly3d = false;
 
     public Body3d(Vector3d c, double m) {
         this.c = c;
@@ -21,5 +23,18 @@ public abstract class Body3d {
         c.plusMe(cV.x(dt));
     }
 
+    abstract public void collision(Body3d body3d);
+
+    abstract public void attract(Body3d body3d);
+
+
     abstract public void draw(Graphics g);
+
+    public boolean isBall3d(){
+        return ball3d;
+    }
+
+    public boolean isPoly3d(){
+        return poly3d;
+    }
 }

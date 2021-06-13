@@ -8,6 +8,8 @@ public abstract class Body2d {
     public Vector2d cA;
     public Vector2d cV;
     public double m;
+    protected boolean ball2d = false;
+    protected boolean poly2d = false;
 
     public Body2d(Vector2d c, double m) {
         this.c = c;
@@ -21,5 +23,17 @@ public abstract class Body2d {
         c.plusMe(cV.x(dt));
     }
 
+    abstract public void collision(Body2d body2d);
+
     abstract public void draw(Graphics g);
+
+    abstract public void attract(Body2d body2d);
+
+    public boolean isBall2d(){
+        return ball2d;
+    }
+
+    public boolean isPoly2d(){
+        return poly2d;
+    }
 }

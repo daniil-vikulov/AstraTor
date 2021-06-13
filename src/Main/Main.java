@@ -1,3 +1,8 @@
+/**
+    This is the "AstraTor" physical engine.
+    WARNING!    In some places you can find examples. They are marked this way: TODO
+    Version: alpha
+ **/
 package Main;
 
 import javax.swing.*;
@@ -28,8 +33,10 @@ public class Main {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.add(panel);
         frame.setVisible(true);
-        while (true) {
-            frame.repaint();
-        }
+        new Thread(() -> {
+            while (true) {
+                frame.repaint();
+            }
+        }).start();
     }
 }

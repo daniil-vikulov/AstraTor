@@ -10,6 +10,20 @@ public class Ball3d extends Body3d{
     }
 
     @Override
+    public void collision(Body3d body3d) {
+
+    }
+
+    @Override
+    public void attract(Body3d body3d) {
+        if (body3d.ball3d){
+
+        }else{
+            //Will be added soon
+        }
+    }
+
+    @Override
     public void draw(Graphics g) {
 
     }

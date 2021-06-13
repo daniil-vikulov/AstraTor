@@ -1,28 +1,26 @@
 package Graphics;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
 import Engine.*;
 import Main.Main;
 
 public class MyPanel extends JPanel {
+    Engine engine;
     double lastTime;
     static double timePast;
     double currentTime;
+    double dt = 0.01;
 
     public MyPanel() {
-            lastTime = System.currentTimeMillis();
-            Interface inF = new Interface();
-            addMouseMotionListener(inF);
-            addMouseListener(inF);
-            setFocusable(true);
-            addKeyListener(inF);
-        ///////////////////
+        lastTime = System.currentTimeMillis();
+        Interface inF = new Interface();
+        addMouseMotionListener(inF);
+        addMouseListener(inF);
+        setFocusable(true);
+        addKeyListener(inF);
+        ////////////////////
+        engine = new Engine(); //TODO
     }
 
     @Override
@@ -35,6 +33,7 @@ public class MyPanel extends JPanel {
         timePast = (currentTime - lastTime) / 1000.0;
         lastTime = currentTime;
         ///////////////////////////
+        engine.update(dt);
         draw(g);
         ///////////////////////////
         g.setColor(Color.white);
@@ -43,8 +42,9 @@ public class MyPanel extends JPanel {
         repaint();
     }
 
-
     private void draw(Graphics g) {
-
+        for (int i = 0; i < engine.data.size(); i++) {
+            engine.data.get(i).draw(g);
+        }
     }
 }
