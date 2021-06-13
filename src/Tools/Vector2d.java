@@ -65,5 +65,19 @@ public class Vector2d {
         return Math.sqrt(x*x + y*y);
     }
 
+    public Vector2d rotate(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        return new Vector2d(cos*x - sin*y, sin*x + cos*y);
+    }
+
+    public void rotateMe(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        double xN = cos*x - sin*y;
+        double yN = sin*x + cos*y;
+        x = xN;
+        y = yN;
+    }
 
 }

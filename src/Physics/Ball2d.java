@@ -1,6 +1,6 @@
 package Physics;
 
-import Tools.Vector2d;
+import Tools.*;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -49,9 +49,9 @@ public class Ball2d extends Body2d{
             if (b.ball2d){
                 double distance = c.distanceTo(b.c);
                 double G = 1e4;
-                Vector2d a = b.c.minus(c).x(G*m*b.m/Math.pow(distance, 3));
-                cA.plusMe(a);
-                b.cA.minusMe(a);
+                Vector2d f = b.c.minus(c).x(G*m*b.m/Math.pow(distance, 3));
+                cF.plusMe(f);
+                b.cF.minusMe(f);
             }else{
                 //Will be added soon
             }

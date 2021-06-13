@@ -7,13 +7,13 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Engine {
-    public ArrayList<Body2d> data = new ArrayList<>();//TODO
+    public ArrayList<Body3d> data = new ArrayList<>();//TODO
     public static double G = 0;
 
     public Engine() { //TODO
-        data.add(new Ball2d(new Vector2d(100,200), 1, 10, Color.gray));
-        data.add(new Ball2d(new Vector2d(200,200), 1, 10, Color.gray));
-        //data.get(data.size()-1).cV = new Vector2d(-20, -2);
+        data.add(new Ball3d(new Vector3d(100,300,0), 1, 10, Color.gray));
+        data.add(new Ball3d(new Vector3d(200,300, 0), 1, 10, Color.gray));
+        data.get(data.size()-1).cV = new Vector3d(-10, 0, 0);
     }
 
     public void update(double dt){
@@ -21,10 +21,6 @@ public class Engine {
             for (int j = i + 1; j < data.size(); j++) {
                 data.get(i).attract(data.get(j));
             }
-        }
-
-        for (int i = 0; i < data.size(); i++) {
-            data.get(i).updateC(dt);
         }
 
         for (int i = 0; i < data.size() ; i++) {
@@ -36,8 +32,14 @@ public class Engine {
         }
 
         for (int i = 0; i < data.size(); i++) {
-            data.get(i).cV.plusMe(new Vector2d(0, G).x(dt));
+            data.get(i).updateC(dt);
+        }
+
+        for (int i = 0; i < data.size(); i++) {
+            data.get(i).cV.plusMe(new Vector3d(0, G, 0).x(dt));
+            data.get(i).cF.xMe(0);
             data.get(i).cA.xMe(0);
         }
+        System.out.println();
     }
 }

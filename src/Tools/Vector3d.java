@@ -73,4 +73,55 @@ public class Vector3d {
     public double length(){
         return Math.sqrt(x*x + y*y + z*z);
     }
+
+    public Vector3d rotateX(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        return new Vector3d(x, cos*y + sin*z, cos*z - sin*y);
+    }
+
+    public Vector3d rotateY(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        return new Vector3d(cos*x + sin*z, y, cos*z - sin*x);
+    }
+
+    public Vector3d rotateZ(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        return new Vector3d(cos*x - sin*y, sin*x + cos*y, z);
+    }
+
+    public void rotateMeX(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        double xN = x;
+        double yN = cos*y + sin*z;
+        double zN = cos*z - sin*y;
+        x = xN;
+        y = yN;
+        z = zN;
+    }
+
+    public void rotateMeY(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        double xN = cos*x + sin*z;
+        double yN = y;
+        double zN = cos*z - sin*x;
+        x = xN;
+        y = yN;
+        z = zN;
+    }
+
+    public void rotateMeZ(double angle){
+        double cos = Math.cos(angle);
+        double sin = Math.sin(angle);
+        double xN = cos*x - sin*y;
+        double yN = sin*x + cos*y;
+        double zN = z;
+        x = xN;
+        y = yN;
+        z = zN;
+    }
 }

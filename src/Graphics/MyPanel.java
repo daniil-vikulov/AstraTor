@@ -20,7 +20,7 @@ public class MyPanel extends JPanel {
         setFocusable(true);
         addKeyListener(inF);
         ////////////////////
-        engine = new Engine(); //TODO
+        engine = new Engine();
     }
 
     @Override
