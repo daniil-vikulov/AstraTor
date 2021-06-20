@@ -1,6 +1,6 @@
 package Tools;
 
-public class Vector2d {
+public class Vector {
     public double x;
     public double y;
 
@@ -9,36 +9,36 @@ public class Vector2d {
         return String.format("(%.6f, %.6f)", x, y);
     }
 
-    public Vector2d(double x, double y) {
+    public Vector(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
-    public Vector2d(Vector2d v) {
+    public Vector(Vector v) {
         this.x = v.x;
         this.y = v.y;
     }
 
-    public Vector2d plus(Vector2d v){
-        return new Vector2d(x + v.x, y + v.y);
+    public Vector plus(Vector v){
+        return new Vector(x + v.x, y + v.y);
     }
 
-    public void plusMe(Vector2d v){
+    public void plusMe(Vector v){
         x+=v.x;
         y+=v.y;
     }
 
-    public Vector2d minus(Vector2d v){
-        return new Vector2d(x - v.x, y - v.y);
+    public Vector minus(Vector v){
+        return new Vector(x - v.x, y - v.y);
     }
 
-    public void minusMe(Vector2d v){
+    public void minusMe(Vector v){
         x-=v.x;
         y-=v.y;
     }
 
-    public Vector2d x(double n){
-        return new Vector2d(x*n, y*n);
+    public Vector x(double n){
+        return new Vector(x*n, y*n);
     }
 
     public void xMe(double n){
@@ -46,8 +46,17 @@ public class Vector2d {
         y*=n;
     }
 
-    public double distanceTo(Vector2d v){
+    public double distanceTo(Vector v){
         return Math.sqrt((v.y - this.y)*(v.y - this.y) + (v.x - this.x)*(v.x - this.x));
+    }
+
+    public Vector norm(){
+        double length = this.length();
+        if (length < 1e-3){
+            return new Vector(0,0);
+        }else{
+            return new Vector(x/length, y/length);
+        }
     }
 
     public void normMe(){
@@ -65,10 +74,10 @@ public class Vector2d {
         return Math.sqrt(x*x + y*y);
     }
 
-    public Vector2d rotate(double angle){
+    public Vector rotate(double angle){
         double cos = Math.cos(angle);
         double sin = Math.sin(angle);
-        return new Vector2d(cos*x - sin*y, sin*x + cos*y);
+        return new Vector(cos*x - sin*y, sin*x + cos*y);
     }
 
     public void rotateMe(double angle){

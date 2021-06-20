@@ -34,17 +34,11 @@ public class MyPanel extends JPanel {
         lastTime = currentTime;
         ///////////////////////////
         engine.update(dt);
-        draw(g);
+        engine.draw(g);
         ///////////////////////////
         g.setColor(Color.white);
         g.drawString(String.format("%.2f", 1000d / ((System.nanoTime() - t1) / 1000000d)), 10, 10);
         lastTime = System.currentTimeMillis();
         repaint();
-    }
-
-    private void draw(Graphics g) {
-        for (int i = 0; i < engine.data.size(); i++) {
-            engine.data.get(i).draw(g);
-        }
     }
 }
