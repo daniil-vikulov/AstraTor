@@ -10,7 +10,7 @@ public class Main {
     public static int HEIGHT = 600;
 
     public static void main(String[]args) {
-        /*JFrame introF = new JFrame();
+        JFrame introF = new JFrame();
         HelperPanel introP = new HelperPanel();
         introF.setSize(800, 450);
         introF.setUndecorated(true);
@@ -20,7 +20,7 @@ public class Main {
         while (!introP.isReady()) {
             introP.repaint();
         }
-        introF.setVisible(false);*/
+        introF.setVisible(false);
         JFrame frame = new JFrame();
         MyPanel panel = new MyPanel();
         frame.setSize(WIDTH+13, HEIGHT+37);
