@@ -22,7 +22,7 @@ public class HelperPanel extends JPanel {
         start = System.currentTimeMillis();
         new Thread(() -> {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -30,11 +30,20 @@ public class HelperPanel extends JPanel {
         }).start();
     }
 
+    float alpha = 0f;
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2D = (Graphics2D)g;
         g.setColor(Color.black);
-        g.drawImage(logo, 0,0, null);
+        g.fillRect(0,0,800,450);
+        g2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        g2D.drawImage(logo, 0,0, null);
+        alpha+=0.01f;
+        if (alpha > 1f) {
+            alpha = 1f;
+        }
         repaint();
     }
 
