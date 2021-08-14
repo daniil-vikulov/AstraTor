@@ -13,15 +13,20 @@ public class Engine {
 
     public Engine() { //TODO
         Material wood = new Material(0.5, new Color(129,94,62));
-        data.add(new Ball(new Vector(100,300), 1, 10, wood));
+/*        data.add(new Ball(new Vector(100,300), 1, 10, wood));
         data.add(new Ball(new Vector(200,300), 1, 10, wood));
-        data.get(data.size()-1).cV = new Vector(-10, 0);
+        data.get(data.size()-1).cV = new Vector(-10, 0);*/
         lines.add(new Line(new Vector(0, 500), new Vector(800, 500)));
         ArrayList<Vector> vectors = new ArrayList<>();
-        vectors.add(new Vector(10, 10));
+        /*vectors.add(new Vector(10, 10));
         vectors.add(new Vector( 210, 10));
         vectors.add(new Vector(110, 183.2));
-        vectors.add(new Vector(20, 100));
+        vectors.add(new Vector(20, 100));*/
+        vectors.add(new Vector( 100, 100));
+        vectors.add(new Vector(100, 300));
+        vectors.add(new Vector(600, 300));
+        vectors.add(new Vector(300, 100));
+        vectors.add(new Vector(200, 500));
         data.add(new Poly(vectors));
     }
 

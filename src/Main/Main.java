@@ -1,8 +1,3 @@
-/**
-    This is the "AstraTor" physical engine.
-    WARNING!    In some places you can find examples. They are marked this way: TODO
-    Version: alpha
- **/
 package Main;
 
 import javax.swing.*;

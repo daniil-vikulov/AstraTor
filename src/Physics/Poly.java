@@ -22,10 +22,22 @@ public class Poly extends Body{
         sortVertexes();
     }
 
+    public Poly() {
+        super(null, 1);
+        vertexes = new ArrayList<>();
+    }
+
+    public Poly(ArrayList<Vector> vertexes){
+        super(null, 1);
+        this.vertexes = vertexes;
+        sortVertexes();
+        findCentre(vertexes);
+    }
+
     private void findCentre(ArrayList<Vector> vertexes) {
         if (vertexes.size() == 3){
             c = findCentreForTriangle(vertexes);
-            System.out.println(getTriangleSquare(vertexes));
+            //System.out.println(getTriangleSquare(vertexes));
         }else if (vertexes.size() > 3){
             double square = getSquare(vertexes);
             ArrayList<Vector> triangle = new ArrayList<>();
@@ -38,14 +50,21 @@ public class Poly extends Body{
                 triangle.add(vertexes.get(i));
                 triangle.add(vertexes.get(i+1));
                 centers.add(new Ball(findCentreForTriangle(triangle), m*getTriangleSquare(triangle)/square));
-                System.out.println(getSquare(triangle));
+                //System.out.println(centers.get(centers.size()-1).c);
+                //System.out.println(centers.get(centers.size()-1).m);
+                //System.out.println(getSquare(triangle));
                 triangle.clear();
             }
             Vector sum = new Vector(0,0);
             for (int i = 0; i < centers.size(); i++) {
-                sum.plusMe(centers.get(i).c);
-                sum.xMe(centers.get(i).m);
+                sum.plusMe(centers.get(i).c.x(centers.get(i).m));
+                //System.out.println("size = " + centers.size());
+                //System.out.println("c(i) = " + centers.get(i).c);
+                //System.out.println("m(i) = " + centers.get(i).m);
+                //sum.xMe(0.5);//centers.get(i).m
             }
+            //System.out.println("c = " + sum);
+            //System.out.println("m = " + m);
             c = sum.x(1/m);
         }
     }
@@ -95,6 +114,7 @@ public class Poly extends Body{
             square+=getTriangleSquare(triangle);
             triangle.clear();
         }
+        //System.out.println("square from gS = " + square);
         return square;
     }
 
@@ -103,18 +123,18 @@ public class Poly extends Body{
         for (int i = 0; i < 3; i++) {
             vertexes.get(i).minusMe(move);
         }
-        System.out.println(vertexes.get(0));
-        System.out.println(vertexes.get(1));
-        System.out.println(vertexes.get(2));
+        //System.out.println(vertexes.get(0));
+        //System.out.println(vertexes.get(1));
+        //System.out.println(vertexes.get(2));
         double l1 = vertexes.get(1).length();
         double l2 = vertexes.get(2).length();
         Vector n1 = vertexes.get(1).norm().x(l1/2);
         Vector n2 = vertexes.get(2).norm().x(l2/2);
         Line med1 = new Line(vertexes.get(2), n1);
         Line med2 = new Line(vertexes.get(1), n2);
-        System.out.println(med1);
-        System.out.println(med2);
-        System.out.println(med1.intersection(med2).plus(move));
+        //System.out.println(med1);
+        //System.out.println(med2);
+        //System.out.println(med1.intersection(med2).plus(move));
         for (int i = 0; i < 3; i++) {
             vertexes.get(i).plusMe(move);
         }
@@ -127,22 +147,13 @@ public class Poly extends Body{
             double b = vectors.get(1).minus(vectors.get(2)).length();
             double c = vectors.get(0).minus(vectors.get(2)).length();
             double p = (a + b + c)/2;
-            return Math.sqrt(p*(p-a)*(p-b)*(p-c));
+            double s = Math.sqrt(p*(p-a)*(p-b)*(p-c));
+            //System.out.println("S gts = " + s);
+            return s;
         }else{
             System.out.println("ERROR: getTriangleSquare()");
             return 0;
         }
-    }
-
-    public Poly() {
-        super(null, 1);
-        vertexes = new ArrayList<>();
-    }
-
-    public Poly(ArrayList<Vector> vertexes){
-        super(null, 1);
-        this.vertexes = vertexes;
-        findCentre(vertexes);
     }
 
     @Override
@@ -182,9 +193,15 @@ public class Poly extends Body{
             g2d.drawPolygon(x, y, vertexes.size());
             g2d.setColor(new Color(37, 146, 198));
             Ellipse2D.Double circle;
+            //Ellipse2D.Double c1;
+            //Ellipse2D.Double c2;
             //System.out.println(c);
             circle = new Ellipse2D.Double((int)(c.x - 2), (int)(c.y - 2), (4), (4));
             g2d.fill(circle);
+/*            c1 = new Ellipse2D.Double(233 - 2, 367 - 2, 4, 4);
+            c2 = new Ellipse2D.Double(367 - 2, 233 - 2, 4, 4);
+            g2d.fill(c1);
+            g2d.fill(c2);*/
         }
     }
 
