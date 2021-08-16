@@ -15,6 +15,7 @@ public class Ball extends Body {
         this.radius = radius;
         this.material = material;
     }
+
     public Ball(Vector c, double m){
         super(c,m);
         radius = 0;
@@ -38,8 +39,6 @@ public class Ball extends Body {
                 b.c.y += push * sin;
                 Vector vR1 = new Vector(cV.x * cos + cV.y * sin, -cV.x * sin + cV.y * cos);
                 Vector vR2 = new Vector(b.cV.x * cos + b.cV.y * sin, -b.cV.x * sin + b.cV.y * cos);
-                /*Vector uR1 = new Vector((vR1.x*(m - b.m) + 2*b.m*vR2.x)/(m + b.m), vR1.y);
-                Vector uR2 = new Vector((vR2.x*(b.m - m) + 2*m*vR1.x)/(m + b.m), vR2.y);*/
                 Vector uR1 = new Vector(vR1.plus(vR2.minus(vR1).x(((kS + 1) * b.m) / (m + b.m))));
                 Vector uR2 = new Vector(vR2.minus(vR2.minus(vR1).x(((kS + 1) * b.m) / (m + b.m))));
                 Vector u1 = new Vector(uR1.x * cos - uR1.y * sin, uR1.x * sin + uR1.y * cos);
@@ -54,8 +53,42 @@ public class Ball extends Body {
     }
 
     @Override
-    public void collideWithLine() {
+    public void collideWithLine(Line l) {
+        if (collidedWithLine(l)){
+            //System.out.println("v before = " + cV);
+            //System.out.println("E before = " + m*cV.length()*cV.length()/2);
+            Vector cVb = new Vector(cV.norm());
+            Vector oZ = l.convertToVector().norm();
+            Vector norm = l.getNorm();
+            double alpha = Math.abs(cVb.findAngle(norm));
+            if (alpha > Math.PI/2){
+                alpha = Math.PI - alpha;
+            }
+            double d = l.distanceToPoint(c);
+            double x = (radius - d)/Math.cos(alpha);
+            c.minusMe(cVb.x(x));                    //THIS MOVES C
+            //System.out.println("oz = " + oZ + oZ.length());
+            //System.out.println("norm = " + norm + norm.length());
+            double vX = cV.project(oZ);
+            double vY = cV.project(norm);
+            //System.out.println(vX + " + " + vY);
+            vY*=-material.getK();
+            cV = oZ.x(vX).plus(norm.x(vY));
+            //System.out.println("E after = " + m*cV.length()*cV.length()/2);
+            //System.out.println("v after = " + cV);
+            //System.out.println("/////////////////////////////////");
+        }
+    }
 
+    private boolean collidedWithLine(Line l){
+        double d = l.distanceToPoint(c);
+        //TODO
+        if (d < radius){
+            //System.out.println("collided");
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

@@ -89,4 +89,17 @@ public class Vector {
         y = yN;
     }
 
+    public double project(Vector toP){
+        double proj = this.length()*Math.cos(this.findAngle(toP));
+        return  proj;
+    }
+
+    public double findAngle(Vector b){
+        return Math.acos(this.dot(b)/(this.length()*b.length()));
+    }
+
+    public double dot(Vector b){
+        return this.x*b.x + this.y*b.y;
+    }
+
 }

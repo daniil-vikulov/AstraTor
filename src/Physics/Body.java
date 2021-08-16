@@ -49,5 +49,5 @@ public abstract class Body {
         return poly;
     }
 
-    public abstract void collideWithLine();
+    public abstract void collideWithLine(Line l);
 }
